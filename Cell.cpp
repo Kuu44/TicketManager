@@ -1,7 +1,10 @@
 #include "Cell.h"
 
-Cell::Cell()
-{
+Cell::Cell(float t_hSize, float t_vSize):hSize(t_hSize), vSize(t_vSize) {}
+void Cell::set(int rows, int cols){
+    maxCols = cols;
+    maxRows = rows;
+
     //Defining Border
     border = sf::RectangleShape(sf::Vector2f(maxCols * (hSize + 1), maxRows * (vSize + 1)));
     border.setFillColor(sf::Color::Black);

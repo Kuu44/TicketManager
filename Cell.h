@@ -8,10 +8,11 @@ class Cell
 private:
     sf::RectangleShape rect[10][10];
     sf::RectangleShape border;
-    float hSize = 200.0f, vSize = 60.f;
-    int maxCols = 5, maxRows = 6;
+    float hSize, vSize;
+    int maxCols, maxRows;
 public:
-    Cell();
+    Cell(float, float);
+    void set(int,int);
     void draw(sf::RenderWindow&);
 };
 
