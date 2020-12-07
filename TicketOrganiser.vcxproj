@@ -153,11 +153,21 @@
     <ClCompile Include="BoxText.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="DeprecatedHelpers.cpp" />
+    <ClCompile Include="InputText.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Entry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxText.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="InputText.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Entry.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TicketOrganiser.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
