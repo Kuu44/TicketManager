@@ -1,4 +1,5 @@
 #include "SFML/Graphics.hpp"
+#include "Entry.h"
 
 #pragma once
 class InputText
@@ -6,14 +7,16 @@ class InputText
 private:
 	sf::Font font;
 	std::string* criteria;
+	Person data;
 public:
 	int currentQuestion;
-	sf::String question, input;
+	std::string question, input;
 	sf::Text questionText, inputText;
 	
 	InputText(std::string*);
-	void nextQuestion();
+	void nextQuestion(Entry&);
 	void reset();
 	void draw(sf::RenderWindow&);
+	void addData(Entry&);
 };
 

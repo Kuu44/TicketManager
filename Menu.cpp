@@ -1,7 +1,7 @@
 #include "Menu.h"
 Menu::Menu(float t_width, float t_height):height(t_height), width(t_width) {
 	if (!font.loadFromFile("Fonts/Roboto-Bold.ttf")) throw("No Font");
-	std::string options[NO_OF_MENU_ITEMS] = { "Input Data", "Show Data" };
+	std::string options[NO_OF_MENU_ITEMS] = { "Input Data", "Show Data","Bubble Sort by Name","Selection Sort by Age"};
 
 	selectedItemIndex = 0;
 

@@ -8,6 +8,8 @@
 #include "InputText.h"
 #include "Entry.h"
 
+#define MAX_SIZE 50
+
 void drawBox(Cell cell, BoxText boxtext, sf::RenderWindow& window) {
 	cell.draw(window);
 	boxtext.draw(window);
@@ -15,47 +17,42 @@ void drawBox(Cell cell, BoxText boxtext, sf::RenderWindow& window) {
 void drawMenu(Menu menu, sf::RenderWindow& window) {
 	menu.draw(window);
 }
+void setBoxes(Cell& cell, BoxText& boxtext,Entry data) {
+	cell.set(data.getSize(), 4);
+	boxtext.set(data.getResult(), data.getSize(), 4);
+}
 int main()
 {
 	//Declarations
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "Ticket Manager", sf::Style::Default);
+	sf::RenderWindow window(sf::VideoMode(1000, 660), "Ticket Manager", sf::Style::Default);
 	window.setFramerateLimit(144);
 	//0=Menu, 1=Input, 2=Show
 	int menuMode = 0;
 
 	float hSize = 200.0f, vSize = 60.f;
-	int maxCols = 5, maxRows = 6;
+	
 	Cell cell(hSize, vSize);
 	BoxText boxtext(hSize, vSize);
 	Menu menu(window.getSize().x, window.getSize().y);
-	std::string criteriaS[3] = {"Name", "Age", "Seat No."};
+	std::string criteriaS[3] = {" Name", " Age", " Seat No."};
 	std::string* criteria=new std::string[3];
 	for (int j = 0; j < 3; j++) {
 		criteria[j] = criteriaS[j];
 	}
 	InputText inputText(criteria);
+	Entry data;
+
+	//Pre-registered, Unsorted Data	
+	data.inputData("Sandesh", 15, 5);
+	data.inputData("Gopal", 22, 1);
+	data.inputData("Anushka", 20, 2);
+	data.inputData("Sushmita", 14, 7);
+
+	//file.read
 
 	//Setting up the table
-	std::string str[4][5] = {
-		{"Just","Look at this","Beauuuuuutiful","Perfectly Centered","Text"},
-		{"Oh","dear,","my","dear","gorgeous"},
-		{"Alluring","Lovely","Magnificient","Marvelous","Resplendent"},
-		{"This Does","Bring A","Smile","To My","Face"}
-	};
-
-	std::string** s;
-	s = new std::string * [4];
-	for (int i = 0; i < 4; i++) {
-		s[i] = new std::string[5];
-	}
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 5; j++) {
-			s[i][j] = str[i][j];
-		}
-	}
-
-	cell.set(maxRows, maxCols);
-	boxtext.set(s, 4, 5);
+	cout<<data.getSize();
+	setBoxes(cell, boxtext, data);
 
 	// run the program as long as the window is open
 	while (window.isOpen()) {
@@ -86,8 +83,13 @@ int main()
 						break;
 					//Clearing input Field
 					case sf::Keyboard::Return:
-						if (inputText.currentQuestion > (3 - 2)) menuMode = 0;
-						if(menuMode==1) inputText.nextQuestion();
+						if (inputText.currentQuestion > 2) { 
+							inputText.addData(data);
+							setBoxes(cell, boxtext, data);
+							menuMode = 0;
+							//file.save
+						}
+						if(menuMode==1) inputText.nextQuestion(data);
 						break;
 					case sf::Keyboard::Up:
 						menu.moveUp();
@@ -104,6 +106,14 @@ int main()
 									break;
 								case 1:
 									menuMode = 2;
+									break;
+								case 2:
+									data.BubbleSort();
+									setBoxes(cell, boxtext, data);
+									break;
+								case 3:
+									data.SelectionSort();
+									setBoxes(cell, boxtext, data);
 									break;
 							}
 						}

@@ -1,12 +1,17 @@
 #pragma once
 #include<iostream>
+#include<cstring>
+#include<string>
+#define MAX_SIZE 50
 
 using namespace std;
 
 struct Person
 {
+public:
+	int symbolNo;
 	int age;
-	char name[50];
+	string name;
 	int seat_no;
 };
 class Entry
@@ -74,77 +79,54 @@ class Entry
 		mergeSort(arr, m + 1, r);
 		merge(arr, l, m, r);
 	}*/
+private:
+	int size;
+public:
+	Person entries[MAX_SIZE]{};
+	Entry();
+	int getSize();
+	void inputData(const char*, int, int);
+	std::string** getResult();
 
-	//for selection sort................
-	void swap(Person* xp, Person* yp)
+	void swap(Person*, Person*);
+	void SelectionSort();
+	void BubbleSort();
+	
+	/*int main()
 	{
-		Person temp = *xp;
-		*xp = *yp;
-		*yp = temp;
-
-	}
-	void SelectionSort(Person data[], int a)
-	{
-		int min_idx;
-		for (int i = 0; i < a; i++)
-		{
-			min_idx = i;
-			for (int j = i + 1; j < a; j++)
-			{
-				if (data[j].age < data[min_idx].age)
-					min_idx = j;
-			}
-			swap(&data[min_idx], &data[i]);
-		}
-	}
-
-	void show_data(Person a)
-	{
-		//cout << "age " << " name " << " seatNum " << endl;
-		cout << a.age << "   " << a.name << "    " << a.seat_no << endl;
-	}
-	void sort(Person l[], int s)
-	{
-		struct Person temp;
-		for (int i = 1; i < s; i++)
-			for (int j = 0; j < s - i; j++) {
-				if (strcmp(l[j].name, l[j + 1].name) > 0) {
-					temp = l[j];
-					l[j] = l[j + 1];
-					l[j + 1] = temp;
-				}
-			}
-
-	}
-	int main()
-	{
-
-		Person p[10]{}, temp;
-		int n = 3;
+		int AGE[10];
+		Person p[10]{};
+		int n;
+		cout << "enter the number of person";
+		cin >> n;
 		for (int i = 0; i < n; i++)
 		{
 			cout << "enter your age" << endl;
 			cin >> p[i].age;
 			cout << "enter your name" << endl;
 			cin >> p[i].name;
-			cout << "the seat number is" << endl;
-			cin >> p[i].seat_no;
+			bool taken = true;
+			while (taken)
+			{
+				cout << "the seat number is" << endl;
+				cin >> p[i].seat_no;
+				taken = false;
+				for (int k = 0; k < i; k++)
+				{
+					if (p[k].seat_no == p[i].seat_no)
+					{
+						cout << "seat already taken" << endl;
+						taken = true;
+						break;
+					}
+				}
+			}
 		}
 		cout << "age " << " name " << " seatNum " << endl;
 		for (int i = 0; i < n; i++)
 		{
-			show_data(p[i]);
+			//show_data(p[i]);
 		}
-		SelectionSort(p, n);
-		//sort(p, n);
-		cout << "after sorting on basis of age" << endl;
-		cout << "age " << " name " << " seatNum " << endl;
-		for (int i = 0; i < n; i++)
-		{
-			show_data(p[i]);
-		}
-
-	}
-
+	}*/
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
-#define NO_OF_MENU_ITEMS 2
+#define NO_OF_MENU_ITEMS 4  
 
 class Menu
 {
