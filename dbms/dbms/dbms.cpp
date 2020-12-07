@@ -111,32 +111,76 @@ void sort(Person l[],int s)
 		}
 	
 }
+
+
 int main()
 {
-	
-	Person p[10]{},temp;
-	int n = 3;
+	int AGE[10];
+	Person p[10]{};
+	int n;
+	cout << "enter the number of person";
+	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
 		cout << "enter your age"<<endl;
 		cin >> p[i].age;
 		cout << "enter your name"<<endl;
 		cin >> p[i].name;
-		cout << "the seat number is"<<endl;
-		cin >> p[i].seat_no;
+		bool taken=true;
+		while (taken)
+		{
+			cout << "the seat number is" << endl;
+			cin >> p[i].seat_no;
+			taken = false;
+			for (int k = 0; k < i; k++)
+			{
+				if (p[k].seat_no == p[i].seat_no)
+				{
+					cout << "seat already taken" << endl;
+					taken = true;
+					break;
+				}
+			}
+		}
+			
 	}
 	cout << "age " << " name " << " seatNum " << endl;
 	for (int i = 0; i < n; i++)
 	{
 		show_data(p[i]);
 	}
-	SelectionSort(p, n);
-	//sort(p, n);
-	cout << "after sorting on basis of age" << endl;
-	cout << "age " << " name " << " seatNum " << endl;
+	//for binary tree......
 	for (int i = 0; i < n; i++)
 	{
-		show_data(p[i]);
+		AGE[i] = p[i].age;
+	
 	}
+	
 
+	//-------------------------------
+	int c;
+	cout << "sort by name or age choice 1 and 2";
+	cin >> c;
+	if (c == 2)
+	{
+		SelectionSort(p, n);
+
+		cout << "after sorting on basis of age" << endl;
+		cout << "age " << " name " << " seatNum " << endl;
+		for (int i = 0; i < n; i++)
+		{
+			show_data(p[i]);
+		}
+	}
+	else
+	{
+		sort(p, n);
+		cout << "after sorting on basis of name" << endl;
+		cout << "age " << " name " << " seatNum " << endl;
+		for (int i = 0; i < n; i++)
+		{
+			show_data(p[i]);
+		}
+	}
 }
+
