@@ -1,7 +1,7 @@
 #include "Menu.h"
 Menu::Menu(float t_width, float t_height):height(t_height), width(t_width) {
 	if (!font.loadFromFile("Fonts/Roboto-Bold.ttf")) throw("No Font");
-	std::string options[NO_OF_MENU_ITEMS] = { "Input Data", "Show Data","Bubble Sort by Name","Selection Sort by Age"};
+	std::string options[NO_OF_MENU_ITEMS] = { "Input Data", "Show Data","Bubble Sort by Name","Selection Sort by Age","Search by Seat Number","Merge Sort by Age"};
 
 	selectedItemIndex = 0;
 
@@ -28,7 +28,6 @@ Menu::Menu(float t_width, float t_height):height(t_height), width(t_width) {
 
 }
 Menu::~Menu() {}
-
 void Menu::draw(sf::RenderWindow& window)
 {
 	for (int i = 0; i < NO_OF_MENU_ITEMS; i++) {
@@ -36,7 +35,6 @@ void Menu::draw(sf::RenderWindow& window)
 		window.draw(buttons[i]);
 	}
 }
-
 void Menu::moveUp()
 {
 	if (selectedItemIndex - 1 >= 0) {
@@ -49,7 +47,6 @@ void Menu::moveUp()
 		buttons[selectedItemIndex].setFillColor(sf::Color::Black);
 	}
 }
-
 void Menu::moveDown()
 {
 	if (selectedItemIndex + 1 < NO_OF_MENU_ITEMS) {

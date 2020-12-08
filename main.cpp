@@ -7,6 +7,7 @@
 #include "Menu.h"
 #include "InputText.h"
 #include "Entry.h"
+#include "Tree.h"
 
 #define MAX_SIZE 50
 
@@ -26,7 +27,7 @@ int main()
 	//Declarations
 	sf::RenderWindow window(sf::VideoMode(1000, 660), "Ticket Manager", sf::Style::Default);
 	window.setFramerateLimit(144);
-	//0=Menu, 1=Input, 2=Show
+	//0=Menu, 1=Input, 2=Show, 3= SelectionSort, 4=BubbleSort, 5=Search, 6=SearchConfirmation, 7=MergeSort
 	int menuMode = 0;
 
 	float hSize = 200.0f, vSize = 60.f;
@@ -40,6 +41,7 @@ int main()
 		criteria[j] = criteriaS[j];
 	}
 	InputText inputText(criteria);
+
 	Entry data;
 
 	//Pre-registered, Unsorted Data	
@@ -50,6 +52,7 @@ int main()
 
 	//file.read
 
+	Tree tree;
 	//Setting up the table
 	cout<<data.getSize();
 	setBoxes(cell, boxtext, data);
@@ -66,7 +69,7 @@ int main()
 				window.close();
 				break;
 			case sf::Event::TextEntered:
-				if (menuMode == 1) {
+				if (menuMode == 1 || menuMode==5) {
 					if (
 						(event.text.unicode>=48 && event.text.unicode<=57) || 
 						(event.text.unicode >= 97 && event.text.unicode <= 122) || 
@@ -81,15 +84,23 @@ int main()
 					case sf::Keyboard::Escape:
 						window.close();
 						break;
-					//Clearing input Field
+						//Clearing input Field
 					case sf::Keyboard::Return:
-						if (inputText.currentQuestion > 2) { 
-							inputText.addData(data);
-							setBoxes(cell, boxtext, data);
-							menuMode = 0;
-							//file.save
+						if (menuMode == 1)
+						{
+							if (inputText.currentQuestion > 2) {
+								inputText.addData(data);
+								setBoxes(cell, boxtext, data);
+								menuMode = 0;
+								//file.save
+							}
+							inputText.nextQuestion(data);
 						}
-						if(menuMode==1) inputText.nextQuestion(data);
+						else if (menuMode == 5) {
+							menuMode = 6;
+							inputText.displaySearchResult(tree.searchTree(inputText.getInputNum(menuMode)));
+						}
+						else if (menuMode == 6) menuMode = 0;
 						break;
 					case sf::Keyboard::Up:
 						menu.moveUp();
@@ -115,11 +126,19 @@ int main()
 									data.SelectionSort();
 									setBoxes(cell, boxtext, data);
 									break;
+								case 4:
+									menuMode = 5;
+									tree.createTree(data);
+									inputText.reset();
+									inputText.setSearchMode();
+									break;
+								case 5:
+									data.MergeSort();
+									setBoxes(cell, boxtext, data);
+									break;
 							}
 						}
-						else {
-							menuMode = 0;
-						}
+						else menuMode = 0;
 						std::cout << "\nCurrent MenuMode:" << menuMode;
 						break;
 				}
@@ -139,6 +158,12 @@ int main()
 			break;
 		case 2:
 			drawBox(cell, boxtext, window);
+			break;
+		case 5:
+			inputText.draw(window);
+			break;
+		case 6:
+			inputText.drawRes(window);
 			break;
 		}
 		window.display();

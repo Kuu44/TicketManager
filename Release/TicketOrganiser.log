@@ -1,7 +1,17 @@
-﻿  InputText.cpp
+﻿  main.cpp
+D:\Docs\Coding_Projects\C++\TicketOrganiser\main.cpp(37,48): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+D:\Docs\Coding_Projects\C++\TicketOrganiser\main.cpp(37,28): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
   Generating code
-  2 of 206 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
+  1 of 231 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   TicketOrganiser.vcxproj -> D:\Docs\Coding_Projects\C++\TicketOrganiser\Release\TicketOrganiser.exe

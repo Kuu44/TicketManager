@@ -1,7 +1,4 @@
 #include "InputText.h"
-#include<string>
-#include<iostream>
-#include<sstream>
 
 InputText::InputText(std::string* t_criteria):criteria(t_criteria)
 {
@@ -18,7 +15,6 @@ InputText::InputText(std::string* t_criteria):criteria(t_criteria)
 	questionText.setCharacterSize(30);
 	questionText.setFillColor(sf::Color::Red);	
 }
-
 void InputText::nextQuestion(Entry& currentData)
 {
 	//take input
@@ -58,24 +54,65 @@ void InputText::nextQuestion(Entry& currentData)
 		}
 	}
 }
+int InputText::getInputNum(int& menuMode) {
+	int result;
+	std::stringstream searchTerm(input);
+	searchTerm >> result;
+
+	if (result > 10 || result < 1) {
+		std::string questionString = "Invalid input! please enter a number upto 10";
+		questionText.setString(questionString);
+		input = "";
+		inputText.setString(input);
+		menuMode = 5; 
+	}
+	return result;
+}
+void InputText::setSearchMode() {
+	std::string questionString = "Enter the Bus number to search for (Upto 10)";
+	questionText.setString(questionString);
+}
+void InputText::displaySearchResult(Person person) {
+	for (int i=0; i < 3; i++) {
+		results[i].setFont(font);
+		results[i].setCharacterSize(20);
+		results[i].setPosition(10.f, 60.f*(i+1));
+	}
+	results[0].setFillColor(sf::Color::Red);
+	results[1].setFillColor(sf::Color::Blue);
+	results[2].setFillColor(sf::Color::Black);
+	if(person.seat_no==-1)
+		results[0].setString("That Seat is Empty!");
+	else {
+		results[0].setString("Name:" + person.name);
+		results[1].setString("Seat No:" + std::to_string(person.seat_no));
+		results[2].setString("Age:" + std::to_string(person.age));
+	}
+}
 void InputText::addData(Entry& newData) {
 	newData.inputData(data.name.c_str(), data.age, data.seat_no);
-
 }
 void InputText::reset() {
 	currentQuestion = 0;
 	std::string questionString = "Please enter the" + criteria[currentQuestion] + ":";
 	questionText.setString(questionString);
 	input = "";
+	results[0].setString("");
+	results[1].setString("");
+	results[2].setString("");
 	inputText.setString(input);
 
 	data.name = "";
 	data.age = NULL;
 	data.seat_no = NULL;
 }
-
 void InputText::draw(sf::RenderWindow &window)
 {
 	window.draw(questionText);
 	window.draw(inputText);
+}
+void InputText::drawRes(sf::RenderWindow &window)
+{
+	for(int i=0;i<3;i++)
+		window.draw(results[i]);
 }

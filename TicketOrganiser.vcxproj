@@ -157,6 +157,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Entry.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxText.h" />
@@ -164,7 +165,7 @@
     <ClInclude Include="InputText.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Entry.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TicketOrganiser.rc" />
